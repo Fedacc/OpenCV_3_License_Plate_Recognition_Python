@@ -38,7 +38,7 @@ def main():
                     imagelist.append(file)
 
     for image in imagelist:
-        imgOriginalScene  = cv2.imread('./LicPlateImages/' + image)               # open image
+        imgOriginalScene  = cv2.imread(os.path.join(image_folder,image))               # open image
     
         if imgOriginalScene is None:                            # if image was not read successfully
             print("\nerror: image not read from file \n\n")  # print error message to std out
@@ -57,7 +57,7 @@ def main():
             print("\nno license plates were detected\n")  # inform user no plates were found
             if not os.path.exists('to-check'):
                     os.makedirs('to-check')
-            cv2.imwrite('./to-check/' + image, imgOriginalScene)
+            cv2.imwrite(os.path.join('to-check',image), imgOriginalScene)
         else:                                                       # else
                     # if we get in here list of possible plates has at leat one plate
     
@@ -77,7 +77,7 @@ def main():
                 # return                                          # and exit program
                 if not os.path.exists('to-check'):
                     os.makedirs('to-check')
-                cv2.imwrite('./to-check/' + image, imgOriginalScene)
+                cv2.imwrite(os.path.join('to-check',image), imgOriginalScene)
             else:
                 drawRedRectangleAroundPlate(imgOriginalScene, licPlate)             # draw red rectangle around plate
 
@@ -92,7 +92,7 @@ def main():
                 # FEDE save image to directory
                 if not os.path.exists('plate-removed'):
                     os.makedirs('plate-removed')
-                cv2.imwrite('./plate-removed/' + image, imgOriginalScene)           # write image out to file
+                cv2.imwrite(os.path.join('plate-removed',image), imgOriginalScene)           # write image out to file
 
             # end if else
 
